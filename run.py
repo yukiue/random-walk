@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 
 import argparse
-import logging
-import sys
 import networkx as nx
 import random
 
@@ -46,21 +44,22 @@ def parse_args():
     return args
 
 
-# class RandomWalker:
-#     def __init__(self, src):
-#         self.pos = src
-#         self.path = []
-#         self.path.append(src)
+class RandomWalker:
+    def __init__(self, src):
+        self.pos = src
+        self.path = []
+        self.path.append(src)
 
-#     def get_neighbors(self):
-#         neighbors = list(g.neighbors(self.pos))
-#         return neighbors
+    def get_neighbors(self):
+        neighbors = list(g.neighbors(self.pos))
+        return neighbors
 
-#     def move(self):
-#         neighbors = self.get_neighbors()
-#         dst = random.choice(neighbors)
-#         self.pos = dst
-#         self.path.append(dst)
+    def move(self):
+        neighbors = self.get_neighbors()
+        dst = random.choice(neighbors)
+        self.pos = dst
+        self.path.append(dst)
+
 
 args = parse_args()
 src = args.src
@@ -68,29 +67,40 @@ dst = args.dst
 agents = args.agents
 trials = args.trials
 filename = args.file
-args.verbose
+verbose_mode = args.verbose
 
-if args.verbose:
-    logging.basicConfig(level=logging.DEBUG,
-                        format='%(levelname)s: %(message)s')
+g = nx.Graph()
+with open(filename, 'r') as f:
+    for line in f:
+        i, j = map(int, line.split())
+        g.add_edge(i, j)
+n = len(g.nodes)
+first_meeting_time = []
+for _ in range(trials):
+    rw = {}
+    visited_node = []
+    cnt = 0
+    for i in range(agents):
+        rw[i] = RandomWalker(src)
+    while dst not in visited_node:
+        for i in range(agents):
+            rw[i].move()
+            visited_node.append(rw[i].pos)
+            # print(f'node: {i}\tstep: {cnt}\tpath: {rws[i].path}')
+        cnt += 1
+    first_meeting_time.append(cnt)
 
-logging.debug(f'src: {src}')
-logging.debug(f'dst: {dst}')
-logging.debug(f'agents: {agents}')
-logging.debug(f'traials: {trials}')
-logging.debug(f'filename: {filename}')
+if verbose_mode:
+    print(f'number of nodes: {n}')
+    print(f'source node id: {src}')
+    print(f'destination node id: {dst}')
+    print(f'number of agents: {agents}')
+    print(f'number of traials: {trials}')
+    print(f'filename: {filename}')
+    print(f'degree of node {dst}: {g.degree(dst)}')
 
-# g = nx.Graph()
-# with open(filename, 'r') as f:
-#     for line in f:
-#         i, j = map(int, line.split())
-#         g.add_edge(i, j)
-# n = len(g.nodes)
-
-# error handling
-# if
-
-# sys.exit(1)
+mu = sum(first_meeting_time) / len(first_meeting_time)
+print(mu)
 
 # first_meeting_time = []
 # for _ in range(trials):
@@ -100,8 +110,4 @@ logging.debug(f'filename: {filename}')
 #         rw.move()
 #         cnt += 1
 #     first_meeting_time.append(cnt)
-#     print(cnt, rw.path)
-
-# mu = sum(first_meeting_time) / len(first_meeting_time)
-
-# print(mu)
+#     # print(f'{cnt} {rw.path}')
