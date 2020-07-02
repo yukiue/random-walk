@@ -7,7 +7,7 @@ import random
 
 def parse_args():
     parser = argparse.ArgumentParser(
-        description='calculate first meeting time')
+        description='calculate first hitting time')
 
     parser.add_argument('-s',
                         '--src',
@@ -61,6 +61,7 @@ class RandomWalker:
         self.path.append(dst)
 
 
+# input
 args = parse_args()
 src = args.src
 dst = args.dst
@@ -75,7 +76,9 @@ with open(filename, 'r') as f:
         i, j = map(int, line.split())
         g.add_edge(i, j)
 n = len(g.nodes)
-first_meeting_time = []
+
+# calculate first hitting time
+first_hitting_time = []
 for _ in range(trials):
     rw = {}
     visited_node = []
@@ -88,26 +91,27 @@ for _ in range(trials):
             visited_node.append(rw[i].pos)
             # print(f'node: {i}\tstep: {cnt}\tpath: {rws[i].path}')
         cnt += 1
-    first_meeting_time.append(cnt)
+    first_hitting_time.append(cnt)
 
+# show input parameters and result
 if verbose_mode:
     print(f'number of nodes: {n}')
     print(f'source node id: {src}')
     print(f'destination node id: {dst}')
+    print(f'degree of destination node: {g.degree(dst)}')
     print(f'number of agents: {agents}')
     print(f'number of traials: {trials}')
     print(f'filename: {filename}')
-    print(f'degree of node {dst}: {g.degree(dst)}')
 
-mu = sum(first_meeting_time) / len(first_meeting_time)
-print(mu)
+mu = sum(first_hitting_time) / len(first_hitting_time)
+print(f'average first hitting time: {mu}')
 
-# first_meeting_time = []
+# first_hitting_time = []
 # for _ in range(trials):
 #     rw = RandomWalker(src)
 #     cnt = 0
 #     while rw.pos != dst:
 #         rw.move()
 #         cnt += 1
-#     first_meeting_time.append(cnt)
+#     first_hitting_time.append(cnt)
 #     # print(f'{cnt} {rw.path}')
