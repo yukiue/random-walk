@@ -1,7 +1,7 @@
 # Random Walk on Network
 
 # Descriptions
-usage: run.py [-h] [-s SRC] [-d DST] [-a AGENTS] [-t TRIALS] [-f FILE] [-v]
+usage: main.py [-h] [-s SRC] [-d DST] [-a AGENTS] [-t TRIALS] [-f FILE] [-v]
 
 calculate first hitting time for random walks on network
 
@@ -17,11 +17,11 @@ optional arguments:
   -v, --verbose         verbose mode
 
 # Examples
-`./run.py -s 1 -d 2 -a 4 -t 100 -f list.txt`
+`./main.py -s 1 -d 2 -a 4 -t 100 -f list.txt`
 ```
 average first hitting time: 123.13
 ```
-`./run.py -s 1 -d 2 -a 4 -t 100 -f list.txt -v`
+`./main.py -s 1 -d 2 -a 4 -t 100 -f list.txt -v`
 ```
 number of nodes: 100
 source node id: 1
