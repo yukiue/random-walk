@@ -7,7 +7,7 @@ import random
 
 def parse_args():
     parser = argparse.ArgumentParser(
-        description='calculate first hitting time')
+        description='calculate first hitting time for random walks on network')
 
     parser.add_argument('-s',
                         '--src',
@@ -80,18 +80,25 @@ n = len(g.nodes)
 # calculate first hitting time
 first_hitting_time = []
 for _ in range(trials):
+    # create random walkers
     rw = {}
-    visited_node = []
-    cnt = 0
     for i in range(agents):
         rw[i] = RandomWalker(src)
-    while dst not in visited_node:
+
+    # move to destination node
+    flag = False
+    cnt = 0
+    while not flag:
         for i in range(agents):
             rw[i].move()
-            visited_node.append(rw[i].pos)
-            # print(f'node: {i}\tstep: {cnt}\tpath: {rws[i].path}')
+            if rw[i].pos == dst:
+                flag = True
+                break
         cnt += 1
     first_hitting_time.append(cnt)
+    # print(cnt)
+    # for i in range(agents):
+    #     print(len(rw[i].path), rw[i].path)
 
 # show input parameters and result
 if verbose_mode:
@@ -105,13 +112,3 @@ if verbose_mode:
 
 mu = sum(first_hitting_time) / len(first_hitting_time)
 print(f'average first hitting time: {mu}')
-
-# first_hitting_time = []
-# for _ in range(trials):
-#     rw = RandomWalker(src)
-#     cnt = 0
-#     while rw.pos != dst:
-#         rw.move()
-#         cnt += 1
-#     first_hitting_time.append(cnt)
-#     # print(f'{cnt} {rw.path}')
