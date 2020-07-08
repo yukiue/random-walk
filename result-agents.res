@@ -1,4 +1,9 @@
-agents mu
+xlabel: agents
+ylabel: first hitting time
+
+name: 
+option: notitle
+option: with points pt 7 ps 0.5
 1 140.63 
 2 72.892 
 3 44.806 

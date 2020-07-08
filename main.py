@@ -73,7 +73,8 @@ verbose_mode = args.verbose
 g = nx.Graph()
 with open(filename, 'r') as f:
     for line in f:
-        i, j = map(int, line.split())
+        # i, j = map(int, line.split())
+        i, j, w = map(int, line.split())
         g.add_edge(i, j)
 n = len(g.nodes)
 
@@ -98,7 +99,8 @@ for _ in range(trials):
     first_hitting_time.append(cnt)
     # print(cnt)
     # for i in range(agents):
-    #     print(len(rw[i].path), rw[i].path)
+    #     print(rw[i].path)
+    # print(first_hitting_time)
 
 # show input parameters and result
 if verbose_mode:
