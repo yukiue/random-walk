@@ -1,11 +1,12 @@
-# パラメータ設定
+# Parameters
+- $G$: [リンクリスト](https://ist.ksc.kwansei.ac.jp/~sakumoto/lecture/ada/file/08_linklist.txt)
 - $n$: 1000
 - $a$: 1
 - $b$: 1, 100, 1000
 - $n_a$: 10
 - $T$: 1000
 
-# 結果
+# Results
 1. $b$ = 1 のとき
 
    $d_b$: 132
@@ -24,11 +25,40 @@
    
    $\hat{\mu}_{a:b}$: 212.174
 
-# おまけ
-![degree](result-degree.png)
+# Discusssion
+これら結果から、重み付き次数 $d_b$ が高いほど $\hat{\mu}_{a:b}$ は小さくなることがわかる。
 
-$a = 1$、$b = i$ ($2 \leq i \leq 1000$)の場合の$d_b$ と $\hat{\mu}_{a:b}$ の関係
+逆に、重み付き次数 $d_b$ が低いほど $\hat{\mu}_{a:b}$ は小さくなる。
 
-![agents](result-agents.png)
+# Appendix
+<!-- ![degree](result-degree.png) -->
 
-$a = 1$、$b = 2$の場合の $n_a$ と $\hat{\mu}_{a:b}$ の関係
+<img src="result-degree.png" width="70%">
+
+- $G$: [リンクリスト](https://ist.ksc.kwansei.ac.jp/~sakumoto/lecture/ada/file/08_linklist.txt)
+- $n$: 1000
+- $a$: 1
+- $b$: 2 ~ 1000
+- $n_a$: 3
+- $T$: 1000
+
+横軸: 重み付き次数 $d_b$
+
+縦軸: $\hat{\mu}_{a:b}$
+
+---
+
+<!-- ![agents](result-agents.png) -->
+
+<img src="result-agents.png" width="70%">
+
+- $G$: [リンクリスト](https://ist.ksc.kwansei.ac.jp/~sakumoto/lecture/ada/file/08_linklist.txt)
+- $n$: 1000
+- $a$: 1
+- $b$: 2
+- $n_a$: 1 ~ 100
+- $T$: 1000
+
+横軸: エージェント数 $n_a$
+
+縦軸: $\hat{\mu}_{a:b}$
