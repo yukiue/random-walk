@@ -74,7 +74,10 @@ g = nx.Graph()
 with open(filename, 'r') as f:
     for line in f:
         # i, j = map(int, line.split())
-        i, j, w = map(int, line.split())
+        # i, j, w = map(int, line.split())
+        sep = line.split()
+        i = int(sep[0])
+        j = int(sep[1])
         g.add_edge(i, j)
 n = len(g.nodes)
 
@@ -89,6 +92,10 @@ for _ in range(trials):
     # move to destination node
     flag = False
     cnt = 0
+
+    if src == dst:
+        flag = True
+
     while not flag:
         for i in range(agents):
             rw[i].move()
